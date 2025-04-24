@@ -2,6 +2,7 @@ package com.example.javaailangchain4j;
 
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -17,6 +18,15 @@ class JavaAiLangchain4jApplicationTests {
 
         String answer = model.chat("你好");
         System.out.println(answer);
+    }
+
+    @Autowired
+    private OpenAiChatModel openAiChatModel;
+
+    @Test
+    public void testSpringBoot() {
+       String answer =  openAiChatModel.chat("你好");
+       System.out.println(answer);
     }
 
 }

@@ -72,7 +72,7 @@
         <!-- 基于open-ai的langchain4j接口：ChatGPT、deepseek都是open-ai标准下的大模型 -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-open-ai</artifactId>
+            <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
