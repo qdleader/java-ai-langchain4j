@@ -25,7 +25,7 @@ class JavaAiLangchain4jApplicationTests {
 
     @Test
     public void testSpringBoot() {
-       String answer =  openAiChatModel.chat("你好");
+       String answer =  openAiChatModel.chat("你是谁");
        System.out.println(answer);
     }
 
