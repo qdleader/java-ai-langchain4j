@@ -1,6 +1,7 @@
 package com.example.javaailangchain4j;
 
 import com.example.javaailangchain4j.assistant.Assistant;
+import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.spring.AiService;
@@ -46,6 +47,23 @@ class JavaAiLangchain4jApplicationTests {
     public void testInterface2() {
        String answer = assistant.chat("你是谁");
        System.out.println(answer);
+    }
+
+
+    @Test
+    public void testInterface3() {
+        MessageWindowChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(10);
+
+        Assistant assistant = AiServices
+                .builder(Assistant.class)
+                .chatLanguageModel(openAiChatModel)
+                .chatMemory(chatMemory)
+                .build();
+       String answer = assistant.chat("我是杨桃儿");
+       System.out.println(answer);
+
+       String answer2 = assistant.chat("我是谁");
+       System.out.println(answer2);
     }
 
 }
