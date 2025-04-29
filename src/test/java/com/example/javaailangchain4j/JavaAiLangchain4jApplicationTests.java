@@ -2,6 +2,7 @@ package com.example.javaailangchain4j;
 
 import com.example.javaailangchain4j.assistant.Assistant;
 import com.example.javaailangchain4j.assistant.MemoryChatAssistant;
+import com.example.javaailangchain4j.assistant.SeparateChatAssistant;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
@@ -75,6 +76,19 @@ class JavaAiLangchain4jApplicationTests {
        System.out.println(answer);
        String answer2 = memoryChatAssistant.chat("我是谁");
        System.out.println(answer2);
+    }
+
+    @Autowired
+    private SeparateChatAssistant separateChatAssistant;
+    @Test
+    public void testInterface5() {
+       String answer = separateChatAssistant.chat(1,"我是杨桃儿");
+       System.out.println(answer);
+       String answer2 = separateChatAssistant.chat(1,"我是谁");
+       System.out.println(answer2);
+
+       String answer3 = separateChatAssistant.chat(2,"我是谁");
+       System.out.println(answer3);
     }
 
 }
