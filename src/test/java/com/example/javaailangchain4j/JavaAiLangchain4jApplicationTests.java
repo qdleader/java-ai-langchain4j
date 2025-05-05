@@ -3,6 +3,7 @@ package com.example.javaailangchain4j;
 import com.example.javaailangchain4j.assistant.Assistant;
 import com.example.javaailangchain4j.assistant.MemoryChatAssistant;
 import com.example.javaailangchain4j.assistant.SeparateChatAssistant;
+import com.example.javaailangchain4j.bean.ChatMessages;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
@@ -10,6 +11,7 @@ import dev.langchain4j.service.spring.AiService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 @SpringBootTest
 class JavaAiLangchain4jApplicationTests {
@@ -89,6 +91,15 @@ class JavaAiLangchain4jApplicationTests {
 
        String answer3 = separateChatAssistant.chat(2,"我是谁");
        System.out.println(answer3);
+    }
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Test
+    public void testMongo() {
+        mongoTemplate.insert(new ChatMessages(1L,"我是杨桃儿"));
+       System.out.println(mongoTemplate);
     }
 
 }
