@@ -93,13 +93,13 @@ class JavaAiLangchain4jApplicationTests {
        System.out.println(answer3);
     }
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    @Test
-    public void testMongo() {
-        mongoTemplate.insert(new ChatMessages(1L,"我是杨桃儿"));
-       System.out.println(mongoTemplate);
-    }
+//    @Autowired
+//    private MongoTemplate mongoTemplate;
+//
+//    @Test
+//    public void testMongo() {
+//        mongoTemplate.insert(new ChatMessages(1L,"我是杨桃儿"));
+//       System.out.println(mongoTemplate);
+//    }
 
 }
