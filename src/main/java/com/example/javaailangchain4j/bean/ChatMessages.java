@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nonapi.io.github.classgraph.json.Id;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,7 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("chat_messages")
 public class ChatMessages {
     @Id
-    private Long messageId;
+    private ObjectId messageId;
+
+    private String memoryId;
 
     private String content;
 }
