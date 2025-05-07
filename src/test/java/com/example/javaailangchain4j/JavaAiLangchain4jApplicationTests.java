@@ -99,6 +99,12 @@ class JavaAiLangchain4jApplicationTests {
        System.out.println(answer);
     }
 
+    @Test
+    public void testInterface7() {
+       String answer = separateChatAssistant.chat2(1,"你是谁？");
+       System.out.println(answer);
+    }
+
 //    @Autowired
 //    private MongoTemplate mongoTemplate;
 //
