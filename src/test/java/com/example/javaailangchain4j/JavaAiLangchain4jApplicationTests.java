@@ -93,6 +93,12 @@ class JavaAiLangchain4jApplicationTests {
        System.out.println(answer3);
     }
 
+    @Test
+    public void testInterface6() {
+       String answer = separateChatAssistant.chat(1,"今天是几号？");
+       System.out.println(answer);
+    }
+
 //    @Autowired
 //    private MongoTemplate mongoTemplate;
 //

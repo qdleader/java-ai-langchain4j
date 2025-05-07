@@ -8,6 +8,6 @@ import dev.langchain4j.service.spring.AiServiceWiringMode;
 
 @AiService(wiringMode = AiServiceWiringMode.EXPLICIT,chatModel = "openAiChatModel",chatMemoryProvider = "chatMemoryProvider")
 public interface SeparateChatAssistant {
-    @SystemMessage("你是我的好朋友，请用东北话回答问题")
+    @SystemMessage(fromResource = "my-prompt-template.txt")
     String chat(@MemoryId int memoryId,@UserMessage String userMessage);
 }
