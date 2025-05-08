@@ -5,10 +5,7 @@ import com.example.javaailangchain4j.bean.ChatForm;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "小桃儿")
 @RestController
@@ -20,6 +17,13 @@ public class XiaoTaoController {
     @Operation(summary = "对话")
     @GetMapping("/chat")
     public String chat(@RequestParam ChatForm chatForm) {
+        System.out.println(chatForm);
+        return xiaoTaoAgent.chat(chatForm.getMemoryId(), chatForm.getMessage());
+    }
+
+    @Operation(summary = "对话")
+    @PostMapping("/chatPost")
+    public String chat1(@RequestBody ChatForm chatForm) {
         System.out.println(chatForm);
         return xiaoTaoAgent.chat(chatForm.getMemoryId(), chatForm.getMessage());
     }
