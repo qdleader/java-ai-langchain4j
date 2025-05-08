@@ -16,9 +16,9 @@ public class XiaoTaoController {
     private XiaoTaoAgent xiaoTaoAgent;
     @Operation(summary = "对话")
     @GetMapping("/chat")
-    public String chat(@RequestParam ChatForm chatForm) {
-        System.out.println(chatForm);
-        return xiaoTaoAgent.chat(chatForm.getMemoryId(), chatForm.getMessage());
+    public String chat(@RequestParam(defaultValue = "1") Long memoryId, @RequestParam String message) {
+        System.out.println(memoryId);
+        return xiaoTaoAgent.chat(memoryId, message);
     }
 
     @Operation(summary = "对话")
