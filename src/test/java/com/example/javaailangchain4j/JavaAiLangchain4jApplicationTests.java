@@ -101,7 +101,7 @@ class JavaAiLangchain4jApplicationTests {
 
     @Test
     public void testInterface7() {
-       String answer = separateChatAssistant.chat2(1,"你是谁？");
+       String answer = separateChatAssistant.chat2(1,"1+2等于几，9的平方根是多少？");
        System.out.println(answer);
     }
 
