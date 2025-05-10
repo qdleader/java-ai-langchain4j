@@ -4,6 +4,8 @@ import com.example.javaailangchain4j.assistant.Assistant;
 import com.example.javaailangchain4j.assistant.MemoryChatAssistant;
 import com.example.javaailangchain4j.assistant.SeparateChatAssistant;
 import com.example.javaailangchain4j.bean.ChatMessages;
+import com.example.javaailangchain4j.entity.Appointment;
+import com.example.javaailangchain4j.service.AppointmentService;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
@@ -113,5 +115,35 @@ class JavaAiLangchain4jApplicationTests {
 //        mongoTemplate.insert(new ChatMessages(1L,"我是杨桃儿"));
 //       System.out.println(mongoTemplate);
 //    }
+
+    @Autowired
+    private AppointmentService appointmentService;
+    @Test
+    void testGetOne() {
+        Appointment appointment = new Appointment();
+        appointment.setUsername("张三");
+        appointment.setIdCard("123456789012345678");
+        appointment.setDepartment("内科");
+        appointment.setDate("2025-04-14");
+        appointment.setTime("上午");
+        Appointment appointmentDB = appointmentService.getOne(appointment);
+        System.out.println(appointmentDB);
+    }
+    @Test
+    void testSave() {
+        Appointment appointment = new Appointment();
+        appointment.setUsername("张三");
+        appointment.setIdCard("123456789012345678");
+        appointment.setDepartment("内科");
+        appointment.setDate("2025-07-14");
+        appointment.setTime("上午");
+        appointment.setDoctorName("张医生");
+        appointmentService.save(appointment);
+    }
+
+    @Test
+    void testRemoveById() {
+        appointmentService.removeById(1L);
+    }
 
 }
