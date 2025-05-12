@@ -7,7 +7,7 @@ import dev.langchain4j.service.V;
 import dev.langchain4j.service.spring.AiService;
 import dev.langchain4j.service.spring.AiServiceWiringMode;
 
-@AiService(wiringMode = AiServiceWiringMode.EXPLICIT,chatModel = "openAiChatModel",chatMemoryProvider = "chatMemoryProvider",tools="appointmentTools")
+@AiService(wiringMode = AiServiceWiringMode.EXPLICIT,chatModel = "openAiChatModel",chatMemoryProvider = "chatMemoryProvider")
 public interface SeparateChatAssistant {
     @SystemMessage(fromResource = "my-prompt-template.txt")
     String chat(@MemoryId int memoryId,@UserMessage String userMessage);
