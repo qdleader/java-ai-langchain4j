@@ -6,6 +6,8 @@ import com.example.javaailangchain4j.assistant.SeparateChatAssistant;
 import com.example.javaailangchain4j.bean.ChatMessages;
 import com.example.javaailangchain4j.entity.Appointment;
 import com.example.javaailangchain4j.service.AppointmentService;
+import dev.langchain4j.data.document.Document;
+import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
@@ -144,6 +146,13 @@ class JavaAiLangchain4jApplicationTests {
     @Test
     void testRemoveById() {
         appointmentService.removeById(1L);
+    }
+
+    @Test
+    public void testReadDocument() {
+
+        Document document = FileSystemDocumentLoader.loadDocument("src/main/resources/科室信息.md");
+                System.out.println(document.text());
     }
 
 }
