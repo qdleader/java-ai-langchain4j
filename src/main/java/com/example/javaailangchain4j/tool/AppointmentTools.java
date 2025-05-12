@@ -3,6 +3,7 @@ package com.example.javaailangchain4j.tool;
 import com.example.javaailangchain4j.entity.Appointment;
 import com.example.javaailangchain4j.service.AppointmentService;
 import dev.langchain4j.agent.tool.P;
+//import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.agent.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,8 +14,9 @@ public class AppointmentTools {
     @Autowired
     private AppointmentService appointmentService;
 
-    @Tool
+//    @Tool
 //    @Tool(name = "预约医生",value = "根据参数，先执行工具方法queryDepartment查询是否可预约，并直接给用户回答是否可预约，并让用户确认所有预约信息，用户确认后再进行预约。")
+    @Tool(name="bookAppointment", value = "根据参数，先执行工具方法queryDepartment查询是否可预约，并直接给用户回答是否可预约，并让用户确认所有预约信息，用户确认后再进行预约。如果用户没有提供具体的医生姓名，请从 向量存储中找到一位医生。")
     public String bookAppointment(Appointment appointment) {
         System.out.println("预约医生"+appointment);
         Appointment appointmentDB = appointmentService.getOne(appointment);
