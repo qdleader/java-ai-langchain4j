@@ -109,6 +109,12 @@
             <artifactId>tokenizers</artifactId>
             <version>0.28.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/dev.langchain4j/langchain4j-community-dashscope -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-community-dashscope</artifactId>
+            <version>1.0.0-beta4</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

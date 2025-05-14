@@ -6,10 +6,14 @@ import com.example.javaailangchain4j.assistant.SeparateChatAssistant;
 import com.example.javaailangchain4j.bean.ChatMessages;
 import com.example.javaailangchain4j.entity.Appointment;
 import com.example.javaailangchain4j.service.AppointmentService;
+import dev.langchain4j.community.model.dashscope.QwenEmbeddingModel;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
+import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.model.output.Response;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.spring.AiService;
 import org.junit.jupiter.api.Test;
@@ -155,4 +159,20 @@ class JavaAiLangchain4jApplicationTests {
                 System.out.println(document.text());
     }
 
+//    import dev.langchain4j.model.dashscope.QwenEmbeddingModel;
+
+
+
+
+    @Test
+    public void testEmbeddingModel(){
+        EmbeddingModel embeddingModel = QwenEmbeddingModel.builder()
+                .apiKey(System.getenv("DASH_ACCESS_KEY"))
+                .modelName("text-embedding-v3")
+                .build();
+
+        Response<Embedding> embed = embeddingModel.embed("你好");
+        System.out.println("向量维度：" + embed.content().vector().length);
+        System.out.println("向量输出：" + embed.toString());
+    }
 }
