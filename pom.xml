@@ -115,6 +115,10 @@
             <artifactId>langchain4j-community-dashscope</artifactId>
             <version>1.0.0-beta4</version>
         </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-pinecone</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
