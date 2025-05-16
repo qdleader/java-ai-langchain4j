@@ -15,16 +15,18 @@ import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.output.Response;
+import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.spring.AiService;
-import dev.langchain4j.store.embedding.EmbeddingMatch;
-import dev.langchain4j.store.embedding.EmbeddingSearchRequest;
-import dev.langchain4j.store.embedding.EmbeddingSearchResult;
-import dev.langchain4j.store.embedding.EmbeddingStore;
+import dev.langchain4j.store.embedding.*;
+import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 class JavaAiLangchain4jApplicationTests {
@@ -235,6 +237,27 @@ class JavaAiLangchain4jApplicationTests {
         System.out.println(embeddingMatch.score()); // 0.8144288515898701
         //返回文本结果
         System.out.println(embeddingMatch.embedded().text());
+    }
+
+    @Test
+    public void testUploadKnowledgeLibrary() {
+        //使用FileSystemDocumentLoader读取指定目录下的知识库文档
+                EmbeddingModel embeddingModel = QwenEmbeddingModel.builder()
+                        .apiKey(System.getenv("DASH_ACCESS_KEY"))
+                        .modelName("text-embedding-v3")
+                        .build();
+        //并使用默认的文档解析器对文档进行解析
+            Document document1 =  FileSystemDocumentLoader.loadDocument("src/main/resources/医院信息.md");
+            Document document2 = FileSystemDocumentLoader.loadDocument("src/main/resources/科室信息.md");
+            Document document3 = FileSystemDocumentLoader.loadDocument("src/main/resources/呼吸内科信息.md");
+            List<Document> documents = Arrays.asList(document1, document2,document3);
+        //文本向量化并存入向量数据库：将每个片段进行向量化，得到一个嵌入向量
+        EmbeddingStoreIngestor
+                .builder()
+                .embeddingStore(embeddingStore)
+                .embeddingModel(embeddingModel)
+                .build()
+                .ingest(documents);
     }
 
 }
