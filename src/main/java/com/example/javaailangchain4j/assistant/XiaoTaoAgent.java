@@ -8,7 +8,7 @@ import dev.langchain4j.service.spring.AiServiceWiringMode;
 
 @AiService(wiringMode = AiServiceWiringMode.EXPLICIT,chatModel = "openAiChatModel",chatMemoryProvider = "chatMemoryProviderXiaoTao",
         tools="appointmentTools",
-        contentRetriever = "contentRetrieverXiaoTao"
+        contentRetriever = "contentRetrieverXiaoTaoPinecone"
 )
 public interface XiaoTaoAgent {
     @SystemMessage(fromResource = "xiaotao-prompt-template.txt")
