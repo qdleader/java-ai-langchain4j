@@ -7,6 +7,7 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -35,10 +36,14 @@ public class XiaoTaoController {
     private XiaoTaoAgentFlux xiaoTaoAgentFlux;
 
     @Operation(summary = "流式对话")
-    @PostMapping(value = "/chatPostFlux",  produces = "text/stream;charset=utf-8")
+    @PostMapping(value = "/chatPostFlux",  produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+//    @PostMapping(value = "/chatPostFlux",  produces = "text/stream;charset=utf-8")
     public Flux<String> chat2(@RequestBody ChatForm chatForm) {
         System.out.println(chatForm);
-        return xiaoTaoAgentFlux.chat(chatForm.getMemoryId(), chatForm.getMessage());
+        return xiaoTaoAgentFlux.chat(chatForm.getMemoryId(), chatForm.getMessage())
+                .map(chunk -> "data:"+chunk)
+                .doOnNext(chunk -> System.out.println("Chunk: [" + chunk + "]"));
+//                .responseHeaders(headers -> headers.set("Content-Encoding", "identity"));;
     }
 
 }
