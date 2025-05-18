@@ -41,8 +41,9 @@ public class XiaoTaoController {
     public Flux<String> chat2(@RequestBody ChatForm chatForm) {
         System.out.println(chatForm);
         return xiaoTaoAgentFlux.chat(chatForm.getMemoryId(), chatForm.getMessage())
-                .map(chunk -> "data:"+chunk)
-                .doOnNext(chunk -> System.out.println("Chunk: [" + chunk + "]"));
+                .map(chunk -> chunk);
+//                .map(chunk -> "data:"+chunk)
+//                .doOnNext(chunk -> System.out.println("Chunk: [" + chunk + "]"));
 //                .responseHeaders(headers -> headers.set("Content-Encoding", "identity"));;
     }
 
