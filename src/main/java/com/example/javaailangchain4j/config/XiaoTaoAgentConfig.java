@@ -16,7 +16,10 @@ import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,21 +44,43 @@ public class XiaoTaoAgentConfig {
 
     @Bean
     ContentRetriever contentRetrieverXiaoTao() {
+        return null;
 
-
-
-        Document document1 =  FileSystemDocumentLoader.loadDocument("src/main/resources/医院信息.md");
-        Document document2 = FileSystemDocumentLoader.loadDocument("src/main/resources/科室信息.md");
-        Document document3 = FileSystemDocumentLoader.loadDocument("src/main/resources/呼吸内科信息.md");
-        List<Document> documents = Arrays.asList(document1, document2,document3);
-
-        // 使用内存向量存储
-        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore();
-        // 使用默认文档分割器
-        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
-
-        // 从嵌入存储(EmbeddingStore)中检索内容
-        return EmbeddingStoreContentRetriever.from(embeddingStore);
+//
+//        Document document1 =  FileSystemDocumentLoader.loadDocument("src/main/resources/医院信息.md");
+//        Document document2 = FileSystemDocumentLoader.loadDocument("src/main/resources/科室信息.md");
+//        Document document3 = FileSystemDocumentLoader.loadDocument("src/main/resources/呼吸内科信息.md");
+//        List<Document> documents = Arrays.asList(document1, document2,document3);
+//
+//        // 使用内存向量存储
+//        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore();
+//        // 使用默认文档分割器
+//        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
+//
+//        // 从嵌入存储(EmbeddingStore)中检索内容
+//        return EmbeddingStoreContentRetriever.from(embeddingStore);
+        // 使用Spring的资源加载器来获取文件
+//        Resource resource1 = new ClassPathResource("src/main/resources/医院信息.md");
+//        Resource resource2 = new ClassPathResource("src/main/resources/科室信息.md");
+//        Resource resource3 = new ClassPathResource("src/main/resources/呼吸内科信息.md");
+//
+//        try {
+//            Document document1 = FileSystemDocumentLoader.loadDocument(resource1.getFile().toPath());
+//            Document document2 = FileSystemDocumentLoader.loadDocument(resource2.getFile().toPath());
+//            Document document3 = FileSystemDocumentLoader.loadDocument(resource3.getFile().toPath());
+//
+//            List<Document> documents = Arrays.asList(document1, document2, document3);
+//
+//            // 使用内存向量存储
+//            InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
+//            // 使用默认文档分割器
+//            EmbeddingStoreIngestor.ingest(documents, embeddingStore);
+//
+//            // 从嵌入存储(EmbeddingStore)中检索内容
+//            return EmbeddingStoreContentRetriever.from(embeddingStore);
+//        } catch (IOException e) {
+//            throw new RuntimeException("无法加载资源文件", e);
+//        }
     }
 
 
